@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Client 1 | SSO Client</title>
+    <link
+      href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+      rel="stylesheet" id="bootstrap-css">
+    <script
+      src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <style>
+            html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  width: 100%;
+  height: 100%;
+}
+body{
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+
+a,i,.fa,.btn,
+a:hover,
+a:focus,.transition, #back-to-top:hover {
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+
+/*
+=====================================================
+3.navbar
+=====================================================
+*/
+.main-nav {
+  background: transparent;
+  border-radius: 0px;
+  border: transparent;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+.main-nav .navbar-brand {
+  max-width: 220px;
+}
+.main-nav .navbar-brand img {
+  margin-top: 3px;
+}
+.main-nav .navbar-nav li a {
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.shrink-nav {
+  background-color: #222;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  -webkit-box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.4);
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -o-transition: all .3s;
+  transition: all .3s;
+}
+.shrink-nav .navbar-nav li a {
+  color: #d0d0d0;
+}
+
+/*
+=====================================================
+4.banner
+=====================================================
+*/
+.banner {
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.banner .banner-content {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 54%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.banner .banner-content h1{
+  font-size: 60px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 35px;
+}
+.banner .banner-content h1 span {
+  color: #2dcc70;
+}
+.banner .banner-content p{
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.7;
+  letter-spacing: .8px;
+  font-weight: 300;
+  margin-bottom: 45px;
+}
+
+        </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top transition main-nav">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1"
+            aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{%url 'home' %}">
+            <p class="text-info" style="color: yellow">Home</p>
+          </a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse"
+          id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="page-scroll" href="#about">About</a></li>
+            <li><a class="page-scroll" href="#services">Services</a></li>
+            <li>
+              {%if not request.user.is_authenticated %}
+              <a class="page-scroll" href="{% url 'simple-sso-login' %}">Login</a>
+              {%else%}
+              <a class="page-scroll" href="{% url 'logout' %}">Logout</a>
+              {%endif%}
+
+            </li>
+
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav><!-- /navbar -->
+
+    <!-- ============= banner ============= -->
+    <div id="home" class="banner" style="background-image:
+      url('https://images.unsplash.com/photo-1473773508845-188df298d2d1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw0OTE4MzZ8fGVufDB8fHx8&w=1000&q=80');">
+      <div class="overlay"></div>
+      <div class="banner-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-1 text-center">
+              <h1><span>Client 1
+
+                  {%if request.user.is_authenticated%}
+                  <p style="color:rgb(0, 251, 134)">Authenticated</p>
+                  {% else %}
+                  <p style="color:rgb(255, 0, 0)">Not Authenticated</p>
+                  {% endif %}
+                </span></h1>
+              <p>We are Effective & Creative agency are many
+                variations of passages of Lorem Ipsum available,
+                but the majority have suffered.
+              </p>
+              <a href="#services" class="btn btn-primary
+                page-scroll" role="button">Our Services</a>
+              <a href="#" class="btn btn-primary" role="button">Purchase
+                Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+# Editors
+.vscode
+.idle/
+
+# virtual envs
+env/
+venv/
+
+# caches
+*.pyc
+__pycache__
+
+# Databases
+*.sqlite3

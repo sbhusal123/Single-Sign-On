@@ -1,0 +1,14 @@
+asgiref==3.4.1
+certifi==2021.5.30
+charset-normalizer==2.0.4
+Django==3.2.7
+django-simple-sso==1.1.0
+idna==3.2
+itsdangerous==0.24
+pkg-resources==0.0.0
+pytz==2021.1
+requests==2.26.0
+sqlparse==0.4.2
+typing-extensions==3.10.0.2
+urllib3==1.26.6
+webservices==0.7
